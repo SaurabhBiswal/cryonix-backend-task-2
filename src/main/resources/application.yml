@@ -1,8 +1,8 @@
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5432/expert_db
-    username: postgres
-    password: password
+    url: ${DB_URL:jdbc:postgresql://localhost:5432/expert_db}
+    username: ${DB_USERNAME:postgres}
+    password: ${DB_PASSWORD:password}
   jpa:
     hibernate:
       ddl-auto: update
