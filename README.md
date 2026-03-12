@@ -1,8 +1,12 @@
 # Expert Consultation Backend Service
 
+ **Live Demo**: `https://cryonix-backend-task-2-production.up.railway.app`
+
+**Live Swagger UI**: `https://cryonix-backend-task-2-production.up.railway.app/swagger-ui.html`
+
 This project is a Spring Boot REST API for searching and exploring available subject experts. It features JWT and Google OAuth2 authentication, PostgreSQL integration, and advanced API features like pagination and input validation.
 
-## ✨ Features
+## Features
 
 - **Expert Search**: Search experts by specialization with keyword matching.
 - **Expert Management**: Add new expert profiles with validation.
@@ -11,7 +15,7 @@ This project is a Spring Boot REST API for searching and exploring available sub
 - **Global Exception Handling**: Structured JSON error responses for all API failures.
 - **Data Initialization**: Automatically seeds 5 sample expert profiles on startup.
 
-## 🛠️ Technical Stack
+## Technical Stack
 
 - **Backend**: Spring Boot 3.4+ (Java 21)
 - **Database**: PostgreSQL
@@ -19,7 +23,7 @@ This project is a Spring Boot REST API for searching and exploring available sub
 - **Validation**: Jakarta Validation API (Hibernate Validator)
 - **Documentation**: README with AI Search Awareness
 
-## 📂 Project Structure
+## Project Structure
 
 ```text
 src/main/java/com/cryonix/expert/
@@ -33,7 +37,7 @@ src/main/java/com/cryonix/expert/
 └── service/            # Business Logic Layer
 ```
 
-## 🚀 Setup Instructions
+## Setup Instructions
 
 ### 1. Prerequisites
 - Java 21+
@@ -60,7 +64,7 @@ Obtain a Client ID and Client Secret from the [Google Cloud Console](https://con
 mvn spring-boot:run
 ```
 
-## 🔐 Authentication Approach
+## Authentication Approach
 
 ### JWT (Local testing)
 1. **Endpoint**: `POST /api/auth/login`
@@ -71,7 +75,7 @@ mvn spring-boot:run
 - The application is configured to handle Google OAuth2 login via Spring Security's `oauth2Login()`.
 - Unauthenticated users will be redirected to the Google login page.
 
-## 📊 Database Schema
+## Database Schema
 
 ### Table: `ExpertProfile`
 | Field | Type | Description |
@@ -82,18 +86,24 @@ mvn spring-boot:run
 | consultation_fee | DOUBLE | Fee per session |
 | available | BOOLEAN | Availability status |
 
-## 🧪 API Demonstration & Testing
+## API Demonstration & Testing
+
+### Live Base URL
+```
+https://cryonix-backend-task-2-production.up.railway.app
+```
 
 ### Interactive Documentation (Swagger)
 Once the application is running, you can explore and test all endpoints interactively:
-- **URL**: `http://localhost:8080/swagger-ui.html`
+- **Live (Railway)**: `https://cryonix-backend-task-2-production.up.railway.app/swagger-ui.html`
+- **Local**: `http://localhost:8080/swagger-ui.html`
 
 ### Postman Testing
 - `GET /experts`: List all experts with pagination (`?page=0&size=5`).
 - `GET /experts/search?q=keyword`: Search experts by specialization.
 - `POST /experts`: Add a new expert (Requires JWT/OAuth).
 
-## 🤖 AI Search Awareness
+## AI Search Awareness
 
 ### Improving Search with AI Embeddings
 While the current search uses SQL `LIKE` queries, it is limited to exact keyword matches. Semantic search using AI embeddings (like OpenAI's `text-embedding-3-small` or local models via Ollama) can significantly improve the user experience:
