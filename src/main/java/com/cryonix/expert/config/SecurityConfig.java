@@ -38,15 +38,17 @@ public class SecurityConfig {
                 .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class)
                 .exceptionHandling(exception -> exception
                         .authenticationEntryPoint((request, response, authException) -> {
-                            response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-                            response.setContentType("application/json");
-                            response.getWriter().write("{\"error\": \"Unauthorized\", \"message\": \"Full authentication is required to access this resource\"}");
+                            String path = request.getRequestURI();
+                            if (path.startsWith("/experts") || path.startsWith("/api")) {
+                                response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+                                response.setContentType("application/json");
+                                response.getWriter().write("{\"error\": \"Unauthorized\", \"message\": \"Full authentication is required to access this resource\"}");
+                            } else {
+                                response.sendRedirect("/login");
+                            }
                         })
                 )
-                .oauth2Login(oauth2 -> oauth2
-                        .loginPage("/api/auth/login")
-                        .defaultSuccessUrl("/experts", true)
-                );
+                .oauth2Login(withDefaults());
 
         return http.build();
     }
