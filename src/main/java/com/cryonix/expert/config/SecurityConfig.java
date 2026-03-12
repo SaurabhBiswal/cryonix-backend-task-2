@@ -40,7 +40,7 @@ public class SecurityConfig {
                         .authenticationEntryPoint((request, response, authException) -> {
                             String accept = request.getHeader("Accept");
                             if (accept != null && accept.contains("text/html")) {
-                                response.sendRedirect("/login");
+                                response.sendRedirect("/oauth2/authorization/google");
                             } else {
                                 response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
                                 response.setContentType("application/json");
@@ -48,8 +48,7 @@ public class SecurityConfig {
                             }
                         })
                 )
-                .oauth2Login(withDefaults())
-                .formLogin(withDefaults());
+                .oauth2Login(withDefaults());
 
         return http.build();
     }
