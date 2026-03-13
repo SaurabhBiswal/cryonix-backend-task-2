@@ -48,7 +48,14 @@ public class SecurityConfig {
                             }
                         })
                 )
-                .oauth2Login(withDefaults());
+                .oauth2Login(oauth2 -> oauth2
+                        .defaultSuccessUrl("/experts", true)
+                        .failureHandler((request, response, exception) -> {
+                            response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+                            response.setContentType("application/json");
+                            response.getWriter().write("{\"error\": \"OAuth2 Login Failed\", \"message\": \"" + exception.getMessage() + "\"}");
+                        })
+                );
 
         return http.build();
     }
