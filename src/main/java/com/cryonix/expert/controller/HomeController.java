@@ -8,6 +8,6 @@ public class HomeController {
 
     @GetMapping("/")
     public String home() {
-        return "redirect:/experts";
+        return "redirect:/oauth2/authorization/google";
     }
 }
